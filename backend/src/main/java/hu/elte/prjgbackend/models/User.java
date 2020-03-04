@@ -1,6 +1,6 @@
 package hu.elte.prjgbackend.models;
 
-import java.awt.image.*;
+import java.awt.image.BufferedImage;
 
 public class User{
 
