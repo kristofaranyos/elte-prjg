@@ -10,6 +10,8 @@ public class Location{
 
     private float latitude;
 
+    private String description;
+
     public String getLocationName() {
         return this.locationName;
     }
@@ -40,6 +42,14 @@ public class Location{
 
     public void setLatitude(float latitude) {
         this.latitude = latitude;
+    }
+
+    public void setDescription(String description){
+        this.description = description;
+    }
+
+    public String getDescription(){
+        return description;
     }
 
 }
