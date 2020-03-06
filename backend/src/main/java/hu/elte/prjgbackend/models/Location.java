@@ -6,9 +6,9 @@ public class Location{
 
     private String address;
 
-    private float longitude;
+    private double longitude;
 
-    private float latitude;
+    private double latitude;
 
     private String description;
 
@@ -28,19 +28,19 @@ public class Location{
         this.address = address;
     }
 
-    public float getLongitude() {
+    public double getLongitude() {
         return this.longitude;
     }
 
-    public void setLongitude(float longitude) {
+    public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
 
-    public float getLatitude() {
+    public double getLatitude() {
         return this.latitude;
     }
 
-    public void setLatitude(float latitude) {
+    public void setLatitude(double latitude) {
         this.latitude = latitude;
     }
 
