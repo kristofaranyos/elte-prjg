@@ -1,49 +1,33 @@
 package hu.elte.prjgbackend.models;
 
-import java.awt.image.BufferedImage;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import java.util.List;
+import javax.persistence.*;
 
+import java.util.Set;
+
+@Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Team {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private String teamName;
 
-    private List<User> teamMembers;
+    @OneToMany(mappedBy = "team")
+    private Set<User> players;
 
-    private List<BufferedImage> uploadedImages;
+    @OneToMany(mappedBy = "team")
+    private Set<Image> uploadedImages;
 
     private float latitude;
 
-    public String getTeamName() {
-        return this.teamName;
-    }
-
-    public void setTeamName(String teamName) {
-        this.teamName = teamName;
-    }
-
-    public List<User> getTeamMembers() {
-        return this.teamMembers;
-    }
-
-    public void setTeamMembers(List<User> teamMembers) {
-        this.teamMembers = teamMembers;
-    }
-
-    public List<BufferedImage> getUploadedImages() {
-        return this.uploadedImages;
-    }
-
-    public void setUploadedImages(List<BufferedImage> uploadedImages) {
-        this.uploadedImages = uploadedImages;
-    }
-
-    public float getLatitude() {
-        return this.latitude;
-    }
-
-    public void setLatitude(float latitude) {
-        this.latitude = latitude;
-    }
-
+    @ManyToOne()
+    @JoinColumn
+    private Game game;
 }
