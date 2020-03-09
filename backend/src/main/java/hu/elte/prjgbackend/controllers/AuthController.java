@@ -5,7 +5,9 @@ import com.google.api.client.googleapis.auth.oauth2.GoogleIdTokenVerifier;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.jackson2.JacksonFactory;
 import hu.elte.prjgbackend.models.User;
+import hu.elte.prjgbackend.models.UserSession;
 import hu.elte.prjgbackend.repositories.UserRepository;
+import hu.elte.prjgbackend.repositories.UserSessionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,8 +15,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.sql.Timestamp;
 import java.util.Collections;
 import java.util.Optional;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/signin")
@@ -24,6 +28,9 @@ public class AuthController {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private UserSessionRepository userSessionRepository;
 
     @PostMapping("/")
     public ResponseEntity externalSignin(@RequestBody String token) {
@@ -65,13 +72,44 @@ public class AuthController {
                 currentUser = checkUser.get();
             }
 
-            //todo make a session for the user
+            UUID uuid = createSession(currentUser, new Timestamp(payload.getExpirationTimeSeconds() * 1000L));
+            System.out.println("UUID: " + uuid);
 
-            return ResponseEntity.ok(null);
+            return ResponseEntity.ok(uuid);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
 
         return ResponseEntity.status(HTTP_BAD_REQUEST).build();
+    }
+
+    private UUID createSession(User user, Timestamp expires) {
+        Optional<UserSession> checkSession = userSessionRepository.findByUser(user);
+        UserSession session = null;
+
+        if (!checkSession.isPresent()) { //no session yet
+            session = new UserSession();
+            session.setUser(user);
+            session.setExpires(expires);
+
+            userSessionRepository.save(session);
+        } else { //session already exists
+            if (checkSession.get().getExpires().after(new Timestamp(System.currentTimeMillis()))) { //not yet expired
+                session = checkSession.get();
+            } else { //expired
+                //delete
+                userSessionRepository.delete(checkSession.get());
+                //todo test this
+
+                //make new
+                session = new UserSession();
+                session.setUser(user);
+                session.setExpires(expires);
+
+                userSessionRepository.save(session);
+            }
+        }
+
+        return session.getToken();
     }
 }
