@@ -10,17 +10,12 @@ import javax.persistence.*;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class User{
+public class Image {
     @Id
-    @Column(unique = true)
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    @Column(unique = true)
-    private String userName;
-
-    private String pictureUrl;
-
-    private String email;
+    private String url;
 
     @ManyToOne
     @JoinColumn
