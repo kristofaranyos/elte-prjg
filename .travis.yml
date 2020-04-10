@@ -1,5 +1,5 @@
 language: java
 jdk: oraclejdk11
 script:
-- ./mvnw install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
-- ./mvnw clean install -B
+- backend/mvnw install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+- backend/mvnw clean install -B
