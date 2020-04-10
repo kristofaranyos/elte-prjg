@@ -38,7 +38,7 @@ public class LocationController{
 
     @PutMapping("newLocation")
     public ResponseEntity<Location> addNewLocation(@Valid @RequestBody Location location){
-        locationRepository.save(location);
+        locationService.addNewLocation(location);
         return new ResponseEntity<>(location, HttpStatus.OK);
     }
 

@@ -2,6 +2,7 @@ package hu.elte.prjgbackend;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -41,5 +42,34 @@ public class LocationServiceTest {
 		MatcherAssert.assertThat("", locs.equals(mockLocs));
 	}
 	
-
+	@Test
+	public void testFindByIdFound() {
+		ArrayList<Location> mockLocs = new ArrayList<Location>();
+		mockLocs.add(new Location(0L, "Location", "Address", 21.432, 23.4232, "Description"));
+		mockLocs.add(new Location(1L, "Location2", "Address2", 21.431, 23765, "Description2"));
+		Mockito.when(locationService.findLocationById(1L)).thenReturn(Optional.ofNullable(findById(1L, mockLocs)));
+		
+		
+		MatcherAssert.assertThat("", locationService.findLocationById(1L).isPresent());
+	}
+	
+	private Location findById(Long id, ArrayList<Location> locs) {
+		for(Location loc: locs) {
+			if(loc.getId()==id) {
+				return loc;
+			}
+		}
+		return null;
+	}
+	
+	@Test
+	public void testFindByIdNotFound() {
+		ArrayList<Location> mockLocs = new ArrayList<Location>();
+		mockLocs.add(new Location(0L, "Location", "Address", 21.432, 23.4232, "Description"));
+		mockLocs.add(new Location(1L, "Location2", "Address2", 21.431, 23765, "Description2"));
+		Mockito.when(locationService.findLocationById(3L)).thenReturn(Optional.ofNullable(findById(3L, mockLocs)));
+		
+		
+		MatcherAssert.assertThat("", !locationService.findLocationById(1L).isPresent());
+	}
 }
