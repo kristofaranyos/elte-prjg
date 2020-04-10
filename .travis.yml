@@ -1,5 +1,8 @@
 language: java
 jdk: oraclejdk11
-script:
+before_install:
+- chmod +x backend/mvnw
+install:
 - backend/mvnw install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+script:
 - backend/mvnw clean install -B
