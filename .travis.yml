@@ -3,4 +3,5 @@ jdk: oraclejdk11
 before_install:
 - chmod +x backend/mvnw
 script:
-- backend/mvnw clean install -B
+- cd backend
+- mvn clean install -B
