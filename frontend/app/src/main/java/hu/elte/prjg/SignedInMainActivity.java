@@ -17,6 +17,5 @@ public class SignedInMainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_signed_in_main);
 
         emailTextView = findViewById(R.id.emailTextview);
-        emailTextView.setText("username");
     }
 }

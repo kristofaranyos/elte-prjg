@@ -1,14 +1,20 @@
 <resources>
     <string name="app_name">Városismereti Játék</string>
-    <!-- Strings related to login -->
-    <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password</string>
-    <string name="action_sign_in">Sign in</string>
-    <string name="welcome">"Welcome!"</string>
-    <string name="invalid_username">Not a valid username</string>
-    <string name="invalid_password">Password must be >5 characters</string>
-    <string name="login_failed">"Login failed"</string>
+    <!-- Buttons -->
     <string name="entry_button">"Belépés a játékba</string>
     <string name="help_button">Súgó</string>
     <string name="create_button">Játék létrehozása</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email cím</string>
+    <string name="prompt_password">Jelszó</string>
+    <string name="action_sign_in">Bejelentkezés</string>
+    <string name="welcome">"Welcome!"</string>
+
+    <!-- Strings related to validation -->
+    <string name="login_failed">"Bejelentkezés nem sikerült"</string>
+    <string name="email_error">Írd be az email címet!</string>
+    <string name="error_invalid_email">Hibás email cím!</string>
+    <string name="password_error">Írd be a jelszót!</string>
+    <string name="error_invalid_password">Legalább 6 hosszú jelszót írj!</string>
 </resources>
