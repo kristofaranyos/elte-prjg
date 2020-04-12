@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        if(SetValidationEmail(emailEditText) && SetValidationPassword()){
+        if(SetValidationEmail(emailEditText.getText().toString()) && SetValidationPassword(passwordEditText.getText().toString())){
             loggedInUser=new LoggedInUser(emailEditText.getText().toString());
             Intent i = new Intent(this, SignedInMainActivity.class);
             i.putExtra("Value1","This is activityTwo!");
@@ -41,11 +41,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     // Check for a valid email address.
-    public boolean SetValidationEmail(EditText email) {
-        if (email.getText().toString().isEmpty()) {
-            email.setError(getResources().getString(R.string.email_error));
+    public boolean SetValidationEmail(String email) {
+        if (email.isEmpty()) {
+            emailEditText.setError(getResources().getString(R.string.email_error));
             isEmailValid = false;
-        } else if (!Patterns.EMAIL_ADDRESS.matcher(emailEditText.getText().toString()).matches()) {
+        } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             emailEditText.setError(getResources().getString(R.string.error_invalid_email));
             isEmailValid = false;
         } else  {
@@ -56,11 +56,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     // Check for a valid password.
-    public boolean SetValidationPassword() {
-        if (passwordEditText.getText().toString().isEmpty()) {
+    public boolean SetValidationPassword(String password) {
+        if (password.isEmpty()) {
             passwordEditText.setError(getResources().getString(R.string.password_error));
             isPasswordValid = false;
-        } else if (passwordEditText.getText().length() < 6) {
+        } else if (password.length() < 6) {
             passwordEditText.setError(getResources().getString(R.string.error_invalid_password));
             isPasswordValid = false;
         } else  {
