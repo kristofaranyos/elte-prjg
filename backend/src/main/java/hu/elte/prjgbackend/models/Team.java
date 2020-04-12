@@ -30,4 +30,12 @@ public class Team {
     @ManyToOne()
     @JoinColumn
     private Game game;
+
+    public Team(Long id, String teamName, Set<User> players, Set<Image> uploadedImages, float latitude){
+        this.id = id;
+        this.teamName = teamName;
+        this.players = players;
+        this.uploadedImages = uploadedImages;
+        this.latitude = latitude;
+    }
 }

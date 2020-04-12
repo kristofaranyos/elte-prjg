@@ -20,4 +20,9 @@ public class Image {
     @ManyToOne
     @JoinColumn
     private Team team;
+
+    public Image(Long id, String url){
+        this.id = id;
+        this.url = url;
+    }
 }

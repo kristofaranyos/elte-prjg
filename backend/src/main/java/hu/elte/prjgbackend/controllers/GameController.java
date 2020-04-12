@@ -7,6 +7,8 @@ import java.util.List;
 
 import hu.elte.prjgbackend.models.Game;
 import hu.elte.prjgbackend.repositories.GameRepository;
+import hu.elte.prjgbackend.services.GameService;
+
 import hu.elte.prjgbackend.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -21,9 +23,12 @@ public class GameController{
     @Autowired
     private GameRepository gameRepository;
 
+    @Autowired
+    private GameService gameService;
+
     @GetMapping("/all")
     public ResponseEntity<Iterable<Game>> getGames(){
-        Iterable<Game> games = gameRepository.findAll();
+        Iterable<Game> games = gameService.findAll();
         return ResponseEntity.ok(games);
     }
 
@@ -34,8 +39,7 @@ public class GameController{
         }
 
         try{
-
-            Game game = gameRepository.findById(id).get();
+            Game game = gameService.findById(id);
             game.setIsRunning(true);
             game.setStartedDate(Instant.now().toEpochMilli());
             gameRepository.save(game);
