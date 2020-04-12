@@ -2,6 +2,10 @@ language: java
 jdk: oraclejdk11
 before_install:
 - chmod +x backend/mvnw
+- chmod +x frontend/gradlew
 script:
 - cd backend
 - mvn clean install -B
+- mvn test
+- cd ../frontend
+- ./gradlew test
