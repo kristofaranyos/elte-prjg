@@ -25,4 +25,11 @@ public class User{
     @ManyToOne
     @JoinColumn
     private Team team;
+
+    public User(String id, String userName, String pictureUrl, String email){
+        this.id = id;
+        this.userName = userName;
+        this.pictureUrl = pictureUrl;
+        this.email = email;
+    }
 }
