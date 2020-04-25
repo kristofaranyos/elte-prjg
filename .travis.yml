@@ -7,5 +7,4 @@ script:
 - cd backend
 - mvn clean install -B
 - mvn test
-- mvn javadoc:javadoc
 - cd ../frontend
