@@ -1,20 +1,13 @@
 package hu.elte.prjgbackend.controllers;
 
 import java.time.Instant;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
 import hu.elte.prjgbackend.models.Game;
 import hu.elte.prjgbackend.repositories.GameRepository;
 import hu.elte.prjgbackend.services.GameService;
-
-import hu.elte.prjgbackend.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import hu.elte.prjgbackend.models.Location;
 
 @RestController
 @RequestMapping("/games")
