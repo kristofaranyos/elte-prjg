@@ -1,6 +1,5 @@
 package hu.elte.prjgbackend.controllers;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,19 +13,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.http.HttpStatus;
 
 import hu.elte.prjgbackend.models.Location;
-import hu.elte.prjgbackend.repositories.LocationRepository;
 import hu.elte.prjgbackend.services.LocationService;
 
 @RestController
 @RequestMapping("/locations")
 public class LocationController{
-
-    @Autowired
-    private LocationRepository locationRepository;
     
     @Autowired
     private LocationService locationService;
